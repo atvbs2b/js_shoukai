@@ -8,60 +8,85 @@ document.addEventListener('DOMContentLoaded', () => {
     const allNavLinks = document.querySelectorAll('#mobile-nav a, #main-nav a');
 
     // ハンバーガーメニュークリック時の処理
-    hamburgerMenu.addEventListener('click', () => {
-        // mobile-nav要素に'active'クラスをトグルする
-        // 'active'クラスはCSSで定義され、メニューの表示/非表示を制御する
-        mobileNav.classList.toggle('active');
-    });
+    if (hamburgerMenu) {
+        hamburgerMenu.addEventListener('click', () => {
+            // mobile-nav要素に'active'クラスをトグルする
+            // 'active'クラスはCSSで定義され、メニューの表示/非表示を制御する
+            if (mobileNav) {
+                mobileNav.classList.toggle('active');
+            }
+        });
+    }
 
     // ナビゲーションリンクがクリックされた時の処理 (モバイルとデスクトップ両方)
     allNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             // モバイルメニューが表示されている場合、リンククリックで閉じる
-            if (mobileNav.classList.contains('active')) {
+            if (mobileNav && mobileNav.classList.contains('active')) {
                 mobileNav.classList.remove('active');
             }
         });
     });
 
-    // Canvas要素の取得と描画処理
-    const canvas = document.getElementById('myCanvas');
-    // Canvasがサポートされているか確認
-    if (canvas && canvas.getContext) { // canvas要素が存在するかどうかも確認
-        // 2D描画コンテキストを取得
-        const ctx = canvas.getContext('2d');
+    // お絵かきボードのロジック
+    const drawingCanvas = document.getElementById('drawingCanvas');
+    const clearCanvasBtn = document.getElementById('clear-canvas-btn');
+
+    if (drawingCanvas && drawingCanvas.getContext) {
+        const ctx = drawingCanvas.getContext('2d');
 
         // Canvasのサイズを設定
         // CSSで幅を100%に設定しているため、ここではピクセル単位で設定
-        // 親要素のサイズに合わせて動的に設定することも可能
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        drawingCanvas.width = drawingCanvas.offsetWidth;
+        drawingCanvas.height = drawingCanvas.offsetHeight;
 
-        // 赤い四角形を描画
-        ctx.fillStyle = 'red'; // 塗りつぶしの色を赤に設定
-        // fillRect(x座標, y座標, 幅, 高さ)
-        ctx.fillRect(50, 50, 100, 75);
+        let isDrawing = false; // 描画中かどうかを示すフラグ
+        let lastX = 0; // 最後に描画したX座標
+        let lastY = 0; // 最後に描画したY座標
 
-        // 青い円を描画
-        ctx.beginPath(); // 新しい描画パスを開始
-        // arc(x座標, y座標, 半径, 開始角度, 終了角度, 反時計回りか)
-        // 角度はラジアンで指定 (Math.PI * 2 は360度)
-        ctx.arc(200, 100, 50, 0, Math.PI * 2, false);
-        ctx.fillStyle = 'blue'; // 塗りつぶしの色を青に設定
-        ctx.fill(); // 現在のパスを塗りつぶす
-        ctx.closePath(); // 現在のパスを閉じる
+        // 線のスタイルを設定
+        ctx.strokeStyle = '#000000'; // 黒色
+        ctx.lineWidth = 3; // 線の太さ
+        ctx.lineJoin = 'round'; // 線と線の結合部分を丸くする
+        ctx.lineCap = 'round'; // 線の端を丸くする
 
-        // 緑色の線を描画
-        ctx.beginPath();
-        ctx.moveTo(20, 20); // 描画の開始点
-        ctx.lineTo(150, 150); // 描画の終了点
-        ctx.strokeStyle = 'green'; // 線の色を緑に設定
-        ctx.lineWidth = 3; // 線の太さを設定
-        ctx.stroke(); // 線を描画
+        // マウスが押された時の処理
+        drawingCanvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            // offsetX, offsetYはイベント発生要素の左上からの相対座標
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
 
-    } else if (canvas) { // canvas要素は存在するがgetContextが使えない場合
-        const canvasContainer = canvas.parentElement;
-        canvasContainer.innerHTML = '<p class="text-red-500">お使いのブラウザはCanvas要素をサポートしていません。</p>';
+        // マウスが動いた時の処理
+        drawingCanvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return; // 描画中でなければ何もしない
+
+            ctx.beginPath(); // 新しいパスを開始
+            ctx.moveTo(lastX, lastY); // 前回の位置から開始
+            ctx.lineTo(e.offsetX, e.offsetY); // 現在の位置まで線を引く
+            ctx.stroke(); // 線を描画
+
+            // 現在の位置を次の開始点として記録
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        // マウスが離れた時、またはキャンバスから出た時の処理
+        drawingCanvas.addEventListener('mouseup', () => isDrawing = false);
+        drawingCanvas.addEventListener('mouseout', () => isDrawing = false);
+
+        // キャンバスをクリアするボタンのイベントリスナー
+        if (clearCanvasBtn) {
+            clearCanvasBtn.addEventListener('click', () => {
+                ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height); // キャンバス全体をクリア
+            });
+        }
+
+    } else if (drawingCanvas) {
+        // Canvas要素は存在するがgetContextが使えない場合
+        const canvasContainer = drawingCanvas.parentElement;
+        if (canvasContainer) {
+            canvasContainer.innerHTML = '<p class="text-red-500">お使いのブラウザはCanvas要素をサポートしていません。</p>';
+        }
     }
 
 

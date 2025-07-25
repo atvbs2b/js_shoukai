@@ -41,10 +41,14 @@ header nav ul li a:hover {
 }
 
 /* キャンバスのレスポンシブ対応 */
-#myCanvas {
+/* お絵かきボードのキャンバス */
+#drawingCanvas {
     max-width: 100%; /* 親要素の幅に合わせて最大幅を設定 */
-    height: auto; /* アスペクト比を維持 */
+    height: 320px; /* 固定の高さ */
     display: block; /* 余白をなくす */
+    cursor: crosshair; /* マウスカーソルを十字にする */
+    border-color: #60a5fa; /* blue-400 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
 }
 
 /* コードブロックのスタイル調整 */
@@ -54,6 +58,7 @@ pre {
     border-radius: 0.5rem; /* rounded-md */
     overflow-x: auto; /* 横スクロールが必要な場合に表示 */
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    border: 1px solid #e2e8f0; /* gray-200 */
 }
 
 /* リンクのスタイル */
@@ -68,8 +73,66 @@ a:hover {
 
 /* セクション間のマージン */
 section {
-    margin-bottom: 2rem; /* mb-8 */
+    margin-bottom: 2.5rem; /* mb-10 */
+    border: 1px solid #e2e8f0; /* gray-200 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* enhanced shadow */
 }
+
+/* ボタンの共通スタイル */
+.action-button {
+    font-weight: bold;
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+    transition: all 0.3s ease-in-out;
+    transform: scale(1); /* 初期スケール */
+    color: white; /* テキスト色を白に統一 */
+    border: none; /* デフォルトのボーダーを削除 */
+    cursor: pointer;
+}
+
+.action-button:hover {
+    transform: scale(1.05); /* ホバーで少し拡大 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.08); /* ホバーで影を強調 */
+}
+
+/* カウンターボタン固有の背景色 */
+#decrement-btn {
+    background-color: #ef4444; /* red-500 */
+}
+
+#decrement-btn:hover {
+    background-color: #dc2626; /* red-600 */
+}
+
+#increment-btn {
+    background-color: #22c55e; /* green-500 */
+}
+
+#increment-btn:hover {
+    background-color: #16a34a; /* green-600 */
+}
+
+/* キャンバスをクリアボタンのスタイル */
+#clear-canvas-btn {
+    background-color: #ef4444; /* red-500 */
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    border: none;
+    cursor: pointer;
+}
+
+#clear-canvas-btn:hover {
+    background-color: #dc2626; /* red-600 */
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+}
+
 
 /* レスポンシブデザインのためのメディアクエリ */
 @media (min-width: 768px) {

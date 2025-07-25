@@ -22,7 +22,7 @@
         <nav id="main-nav" class="hidden md:block">
             <ul class="flex space-x-4">
                 <li><a href="#intro" class="hover:underline">JavaScriptとは</a></li>
-                <li><a href="#drawing" class="hover:underline">絵を描こう！</a></li>
+                <li><a href="#drawing" class="hover:underline">お絵かきボード</a></li>
                 <li><a href="#counter" class="hover:underline">カウンターを体験</a></li>
                 <li><a href="#applications" class="hover:underline">活用例</a></li>
             </ul>
@@ -32,7 +32,7 @@
     <nav id="mobile-nav" class="mobile-menu bg-blue-700 text-white p-4 shadow-lg md:hidden">
         <ul class="flex flex-col space-y-2">
             <li><a href="#intro" class="block py-2 hover:bg-blue-800 rounded">JavaScriptとは</a></li>
-            <li><a href="#drawing" class="block py-2 hover:bg-blue-800 rounded">絵を描こう！</a></li>
+            <li><a href="#drawing" class="block py-2 hover:bg-blue-800 rounded">お絵かきボード</a></li>
             <li><a href="#counter" class="block py-2 hover:bg-blue-800 rounded">カウンターを体験</a></li>
             <li><a href="#applications" class="block py-2 hover:bg-blue-800 rounded">活用例</a></li>
         </ul>
@@ -62,42 +62,65 @@
         </section>
 
         <section id="drawing" class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4">JavaScriptで絵を描こう！</h2>
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">JavaScriptでお絵かきボード！</h2>
             <p class="mb-4 leading-relaxed">
-                JavaScriptとHTMLの`&lt;canvas&gt;`要素を使えば、ウェブページ上で簡単に図形を描画したり、アニメーションを作成したりできます。ここでは、シンプルな図形を描く例を見てみましょう。
+                JavaScriptとHTMLの`&lt;canvas&gt;`要素を使えば、ウェブページ上で自由にお絵かきができます。マウスをドラッグして、自分だけの絵を描いてみましょう！
             </p>
-            <div class="flex flex-col md:flex-row items-center md:space-x-6 mb-6">
-                <div class="md:w-1/2 w-full mb-4 md:mb-0">
-                    <canvas id="myCanvas" class="border-2 border-blue-300 bg-white rounded-md shadow-md w-full h-64"></canvas>
-                    <p class="text-center text-sm text-gray-600 mt-2">上記キャンバスにJavaScriptで描画されます。</p>
-                </div>
-                <div class="md:w-1/2 w-full">
-                    <img src="https://placehold.co/600x400/90EE90/000000?text=Drawing+Example" alt="描画例のイメージ" class="w-full h-auto rounded-md shadow-sm">
-                </div>
+            <div class="flex flex-col items-center justify-center mb-6">
+                <canvas id="drawingCanvas" class="border-2 border-blue-300 bg-white rounded-md shadow-md w-full h-80"></canvas>
+                <button id="clear-canvas-btn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    キャンバスをクリア
+                </button>
+                <p class="text-center text-sm text-gray-600 mt-2">上記キャンバスにマウスで絵を描けます。</p>
             </div>
-            <h3 class="text-2xl font-semibold text-blue-600 mb-3">描画コードの解説</h3>
+            <h3 class="text-2xl font-semibold text-blue-600 mb-3">お絵かきコードの解説</h3>
             <p class="mb-4 leading-relaxed">
-                以下のJavaScriptコードは、上記のキャンバス要素に赤い四角と青い円を描画します。
+                以下のJavaScriptコードは、キャンバス上でのマウス操作を検知し、線を描画するロジックを実装しています。
             </p>
             <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto text-sm mb-4"><code>
 // HTMLのcanvas要素を取得
-const canvas = document.getElementById('myCanvas');
+const canvas = document.getElementById('drawingCanvas');
 // 2D描画コンテキストを取得
 const ctx = canvas.getContext('2d');
 
-// 四角形を描画
-ctx.fillStyle = 'red'; // 塗りつぶしの色を赤に設定
-ctx.fillRect(50, 50, 100, 75); // (x, y, width, height)
+let isDrawing = false; // 描画中かどうかを示すフラグ
+let lastX = 0; // 最後に描画したX座標
+let lastY = 0; // 最後に描画したY座標
 
-// 円を描画
-ctx.beginPath(); // 新しいパスを開始
-ctx.arc(200, 100, 50, 0, Math.PI * 2, false); // (x, y, radius, startAngle, endAngle, antiClockwise)
-ctx.fillStyle = 'blue'; // 塗りつぶしの色を青に設定
-ctx.fill(); // パスを塗りつぶす
-ctx.closePath(); // パスを閉じる
+// 線のスタイルを設定
+ctx.strokeStyle = '#000000'; // 黒色
+ctx.lineWidth = 3; // 線の太さ
+ctx.lineJoin = 'round'; // 線と線の結合部分を丸くする
+ctx.lineCap = 'round'; // 線の端を丸くする
+
+// マウスが押された時の処理
+canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY]; // 現在のマウス位置を記録
+});
+
+// マウスが動いた時の処理
+canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing) return; // 描画中でなければ何もしない
+    ctx.beginPath(); // 新しいパスを開始
+    ctx.moveTo(lastX, lastY); // 前回の位置から開始
+    ctx.lineTo(e.offsetX, e.offsetY); // 現在の位置まで線を引く
+    ctx.stroke(); // 線を描画
+    [lastX, lastY] = [e.offsetX, e.offsetY]; // 現在の位置を次の開始点として記録
+});
+
+// マウスが離れた時、またはキャンバスから出た時の処理
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
+// キャンバスをクリアするボタンのイベントリスナー
+const clearButton = document.getElementById('clear-canvas-btn');
+clearButton.addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // キャンバス全体をクリア
+});
             </code></pre>
             <p class="leading-relaxed">
-                このコードでは、まず`canvas`要素とその2D描画コンテキストを取得します。`fillRect()`で四角形を、`beginPath()`、`arc()`、`fill()`の組み合わせで円を描画しています。色は`fillStyle`プロパティで設定できます。
+                このコードでは、`mousedown`、`mousemove`、`mouseup`、`mouseout`イベントリスナーを使って、マウスの動きを検知しています。`isDrawing`フラグで描画中かどうかを管理し、`mousemove`イベント中に`lineTo()`と`stroke()`を使って連続的に線を描画しています。また、`clearRect()`を使ってキャンバスをリセットする機能も追加しました。
             </p>
         </section>
 
@@ -109,10 +132,10 @@ ctx.closePath(); // パスを閉じる
             <div class="flex flex-col items-center justify-center space-y-4">
                 <div class="text-6xl font-bold text-blue-800" id="count-display">0</div>
                 <div class="flex space-x-4">
-                    <button id="decrement-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    <button id="decrement-btn" class="action-button bg-red-500 hover:bg-red-600">
                         -1
                     </button>
-                    <button id="increment-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    <button id="increment-btn" class="action-button bg-green-500 hover:bg-green-600">
                         +1
                     </button>
                 </div>
@@ -140,7 +163,7 @@ decrementBtn.addEventListener('click', () => {
     updateCountDisplay(); // 表示を更新
 });
 
-// インクリメントボタンのイベントリスナー
+// インクリメントボタンのイベントリスner
 incrementBtn.addEventListener('click', () => {
     count++; // カウントを増やす
     updateCountDisplay(); // 表示を更新
@@ -174,7 +197,7 @@ updateCountDisplay(); // ページ読み込み時に初期値を表示
 
     <footer class="bg-gray-200 text-center p-4 text-gray-700 text-sm rounded-t-lg">
         <p>&copy; 2025 JavaScript入門チュートリアル</p>
-        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約6時間</p>
+        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約7時間</p>
     </footer>
 
     <script src="script.js"></script>

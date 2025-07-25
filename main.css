@@ -44,7 +44,8 @@ header nav ul li a:hover {
 /* お絵かきボードのキャンバス */
 #drawingCanvas {
     max-width: 100%; /* 親要素の幅に合わせて最大幅を設定 */
-    height: 320px; /* 固定の高さ */
+    min-height: 250px; /* 最小高さを設定 */
+    height: 40vh; /* ビューポートの高さの40% */
     display: block; /* 余白をなくす */
     cursor: crosshair; /* マウスカーソルを十字にする */
     border-color: #60a5fa; /* blue-400 */

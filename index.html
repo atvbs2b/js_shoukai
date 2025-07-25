@@ -67,7 +67,7 @@
                 JavaScriptとHTMLの`&lt;canvas&gt;`要素を使えば、ウェブページ上で自由にお絵かきができます。マウスをドラッグして、自分だけの絵を描いてみましょう！
             </p>
             <div class="flex flex-col items-center justify-center mb-6">
-                <canvas id="drawingCanvas" class="border-2 border-blue-300 bg-white rounded-md shadow-md w-full h-80"></canvas>
+                <canvas id="drawingCanvas" class="border-2 border-blue-300 bg-white rounded-md shadow-md w-full"></canvas>
                 <button id="clear-canvas-btn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
                     キャンバスをクリア
                 </button>
@@ -163,7 +163,7 @@ decrementBtn.addEventListener('click', () => {
     updateCountDisplay(); // 表示を更新
 });
 
-// インクリメントボタンのイベントリスner
+// インクリメントボタンのイベントリスナー
 incrementBtn.addEventListener('click', () => {
     count++; // カウントを増やす
     updateCountDisplay(); // 表示を更新
@@ -197,7 +197,7 @@ updateCountDisplay(); // ページ読み込み時に初期値を表示
 
     <footer class="bg-gray-200 text-center p-4 text-gray-700 text-sm rounded-t-lg">
         <p>&copy; 2025 JavaScript入門チュートリアル</p>
-        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約7時間</p>
+        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約8時間</p>
     </footer>
 
     <script src="script.js"></script>

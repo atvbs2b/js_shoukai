@@ -35,16 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (drawingCanvas && drawingCanvas.getContext) {
         const ctx = drawingCanvas.getContext('2d');
 
-        // Canvasのサイズを設定
-        // CSSで幅を100%に設定しているため、ここではピクセル単位で設定
-        drawingCanvas.width = drawingCanvas.offsetWidth;
-        drawingCanvas.height = drawingCanvas.offsetHeight;
-
         let isDrawing = false; // 描画中かどうかを示すフラグ
         let lastX = 0; // 最後に描画したX座標
         let lastY = 0; // 最後に描画したY座標
 
+        // キャンバスのサイズを親要素に合わせて設定する関数
+        const resizeCanvas = () => {
+            // CSSで設定された表示サイズに合わせて、Canvasの内部解像度を設定
+            drawingCanvas.width = drawingCanvas.offsetWidth;
+            drawingCanvas.height = drawingCanvas.offsetHeight;
+            // 解像度変更後に線のスタイルを再設定（リセットされるため）
+            ctx.strokeStyle = '#000000'; // 黒色
+            ctx.lineWidth = 3; // 線の太さ
+            ctx.lineJoin = 'round'; // 線と線の結合部分を丸くする
+            ctx.lineCap = 'round'; // 線の端を丸くする
+        };
+
+        // 初期ロード時とウィンドウリサイズ時にキャンバスのサイズを設定
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
         // 線のスタイルを設定
+        // resizeCanvas関数内で設定済みだが、念のためここでも設定
         ctx.strokeStyle = '#000000'; // 黒色
         ctx.lineWidth = 3; // 線の太さ
         ctx.lineJoin = 'round'; // 線と線の結合部分を丸くする
@@ -52,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // マウスが押された時の処理
         drawingCanvas.addEventListener('mousedown', (e) => {
+            e.preventDefault(); // デフォルトの動作（テキスト選択など）を防ぐ
             isDrawing = true;
             // offsetX, offsetYはイベント発生要素の左上からの相対座標
             [lastX, lastY] = [e.offsetX, e.offsetY];
@@ -59,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // マウスが動いた時の処理
         drawingCanvas.addEventListener('mousemove', (e) => {
+            e.preventDefault(); // デフォルトの動作を防ぐ
             if (!isDrawing) return; // 描画中でなければ何もしない
 
             ctx.beginPath(); // 新しいパスを開始

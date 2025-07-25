@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript入門：ウェブを動かす魔法の言語</title>
+    <!-- Tailwind CSS CDNを最初に読み込むことで、カスタムCSSがTailwindのユーティリティクラスを上書きできるようにする -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Tailwind CSS CDN */
-        @import url('https://cdn.tailwindcss.com');
-    </style>
+    <!-- 新しいフォントの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Merriweather:wght@900&family=Kosugi+Maru&display=swap" rel="stylesheet">
 </head>
-<body class="font-inter bg-gray-50 text-gray-800">
-    <header class="bg-blue-600 text-white p-4 shadow-md flex justify-between items-center rounded-b-lg">
-        <h1 class="text-2xl font-bold">JavaScript入門</h1>
+<body>
+    <header class="p-4 shadow-md flex justify-between items-center rounded-b-lg">
+        <h1 class="header-h1">JavaScript入門</h1>
         <button id="hamburger-menu" class="text-white focus:outline-none md:hidden">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -21,35 +20,35 @@
         </button>
         <nav id="main-nav" class="hidden md:block">
             <ul class="flex space-x-4">
-                <li><a href="#intro" class="hover:underline">JavaScriptとは</a></li>
-                <li><a href="#drawing" class="hover:underline">お絵かきボード</a></li>
-                <li><a href="#counter" class="hover:underline">カウンターを体験</a></li>
-                <li><a href="#applications" class="hover:underline">活用例</a></li>
+                <li><a href="#intro">JavaScriptとは</a></li>
+                <li><a href="#drawing">お絵かきボード</a></li>
+                <li><a href="#counter">カウンターを体験</a></li>
+                <li><a href="#applications">活用例</a></li>
             </ul>
         </nav>
     </header>
 
-    <nav id="mobile-nav" class="mobile-menu bg-blue-700 text-white p-4 shadow-lg md:hidden">
+    <nav id="mobile-nav" class="mobile-menu p-4 shadow-lg md:hidden">
         <ul class="flex flex-col space-y-2">
-            <li><a href="#intro" class="block py-2 hover:bg-blue-800 rounded">JavaScriptとは</a></li>
-            <li><a href="#drawing" class="block py-2 hover:bg-blue-800 rounded">お絵かきボード</a></li>
-            <li><a href="#counter" class="block py-2 hover:bg-blue-800 rounded">カウンターを体験</a></li>
-            <li><a href="#applications" class="block py-2 hover:bg-blue-800 rounded">活用例</a></li>
+            <li><a href="#intro" class="block py-2 rounded">JavaScriptとは</a></li>
+            <li><a href="#drawing" class="block py-2 rounded">お絵かきボード</a></li>
+            <li><a href="#counter" class="block py-2 rounded">カウンターを体験</a></li>
+            <li><a href="#applications" class="block py-2 rounded">活用例</a></li>
         </ul>
     </nav>
 
     <main class="container mx-auto p-4 md:p-8">
-        <section id="intro" class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4">JavaScriptとは？</h2>
+        <section id="intro" class="box5-5 mb-8">
+            <h2 class="heading-16">JavaScriptとは？</h2>
             <p class="mb-4 leading-relaxed">
                 JavaScriptは、ウェブページに動きと対話性をもたらすためのプログラミング言語です。HTMLがページの構造を、CSSがページの見た目を定義するのに対し、JavaScriptはユーザーの操作に応じた動的なコンテンツの表示、データの送受信、アニメーションの制御など、ウェブサイトの「振る舞い」を制御します。
             </p>
             <p class="mb-4 leading-relaxed">
                 現代のウェブ開発において、JavaScriptは不可欠な存在であり、フロントエンド開発だけでなく、Node.jsの登場によりサーバーサイド開発やデスクトップアプリケーション開発、モバイルアプリ開発にもその活躍の場を広げています。
             </p>
-            <img src="https://placehold.co/600x400/ADD8E6/000000?text=JavaScript+Introduction" alt="JavaScriptの紹介イメージ" class="w-full h-auto rounded-md shadow-sm mb-4">
+            <img src="https://placehold.co/600x400/DAE2E5/454545?text=JavaScript+Introduction" alt="JavaScriptの紹介イメージ" class="w-full h-auto mb-4">
             <h3 class="text-2xl font-semibold text-blue-600 mb-3">JavaScriptの主な特徴</h3>
-            <ul class="list-disc list-inside space-y-2 mb-4">
+            <ul>
                 <li><strong>インタプリタ型言語:</strong> コンパイル不要でブラウザが直接実行します。</li>
                 <li><strong>イベント駆動型:</strong> ユーザーのクリックやキー入力などのイベントに応じて処理を実行します。</li>
                 <li><strong>非同期処理:</strong> 時間のかかる処理をバックグラウンドで実行し、ページの応答性を保ちます。</li>
@@ -57,18 +56,18 @@
                 <li><strong>豊富なライブラリとフレームワーク:</strong> React, Vue.js, Angularなど、開発を効率化するツールが多数存在します。</li>
             </ul>
             <p class="text-sm text-gray-600">
-                さらに詳しく知りたい方は、<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript" target="_blank" class="text-blue-500 hover:underline">MDN Web Docs</a>をご覧ください。
+                さらに詳しく知りたい方は、<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript" target="_blank">MDN Web Docs</a>をご覧ください。
             </p>
         </section>
 
-        <section id="drawing" class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4">JavaScriptでお絵かきボード！</h2>
+        <section id="drawing" class="box5-5 mb-8">
+            <h2 class="heading-16">JavaScriptでお絵かきボード！</h2>
             <p class="mb-4 leading-relaxed">
                 JavaScriptとHTMLの`&lt;canvas&gt;`要素を使えば、ウェブページ上で自由にお絵かきができます。マウスをドラッグして、自分だけの絵を描いてみましょう！
             </p>
             <div class="flex flex-col items-center justify-center mb-6">
-                <canvas id="drawingCanvas" class="border-2 border-blue-300 bg-white rounded-md shadow-md w-full"></canvas>
-                <button id="clear-canvas-btn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                <canvas id="drawingCanvas" class="w-full"></canvas>
+                <button id="clear-canvas-btn" class="mt-4 action-button">
                     キャンバスをクリア
                 </button>
                 <p class="text-center text-sm text-gray-600 mt-2">上記キャンバスにマウスで絵を描けます。</p>
@@ -124,18 +123,18 @@ clearButton.addEventListener('click', () => {
             </p>
         </section>
 
-        <section id="counter" class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4">カウンターを体験しよう！</h2>
+        <section id="counter" class="box5-5 mb-8">
+            <h2 class="heading-16">カウンターを体験しよう！</h2>
             <p class="mb-4 leading-relaxed">
                 JavaScriptを使って、ボタンのクリックに応じて数値を増減させるシンプルなカウンターです。DOM操作とイベントリスナーの基本的な使い方を体験できます。
             </p>
             <div class="flex flex-col items-center justify-center space-y-4">
-                <div class="text-6xl font-bold text-blue-800" id="count-display">0</div>
+                <div class="text-6xl font-bold" id="count-display">0</div>
                 <div class="flex space-x-4">
-                    <button id="decrement-btn" class="action-button bg-red-500 hover:bg-red-600">
+                    <button id="decrement-btn" class="action-button">
                         -1
                     </button>
-                    <button id="increment-btn" class="action-button bg-green-500 hover:bg-green-600">
+                    <button id="increment-btn" class="action-button">
                         +1
                     </button>
                 </div>
@@ -176,12 +175,12 @@ updateCountDisplay(); // ページ読み込み時に初期値を表示
             </p>
         </section>
 
-        <section id="applications" class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4">その他のJavaScriptの活用例</h2>
+        <section id="applications" class="box5-5 mb-8">
+            <h2 class="heading-16">その他のJavaScriptの活用例</h2>
             <p class="mb-4 leading-relaxed">
                 JavaScriptはウェブページのインタラクティブ性を高めるだけでなく、様々な分野で活用されています。
             </p>
-            <ol class="list-decimal list-inside space-y-2 mb-4">
+            <ol>
                 <li><strong>Node.js:</strong> サーバーサイドでJavaScriptを実行し、ウェブアプリケーションのバックエンドを構築できます。</li>
                 <li><strong>React, Vue.js, Angular:</strong> 大規模なシングルページアプリケーション（SPA）を効率的に開発するための人気フレームワークです。</li>
                 <li><strong>非同期処理（Promise, async/await）:</strong> ネットワークからのデータ取得など、時間のかかる処理をスムーズに行うための機能です。</li>
@@ -190,14 +189,14 @@ updateCountDisplay(); // ページ読み込み時に初期値を表示
                 <li><strong>PWA (Progressive Web Apps):</strong> オフラインでも動作する、ネイティブアプリのような体験を提供するウェブアプリケーションです。</li>
             </ol>
             <p class="text-sm text-gray-600">
-                より高度なJavaScriptの活用例については、<a href="https://www.freecodecamp.org/news/tag/javascript/" target="_blank" class="text-blue-500 hover:underline">freeCodeCampのJavaScript記事</a>も参考になります。
+                より高度なJavaScriptの活用例については、<a href="https://www.freecodecamp.org/news/tag/javascript/" target="_blank">freeCodeCampのJavaScript記事</a>も参考になります。
             </p>
         </section>
     </main>
 
     <footer class="bg-gray-200 text-center p-4 text-gray-700 text-sm rounded-t-lg">
         <p>&copy; 2025 JavaScript入門チュートリアル</p>
-        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約8時間</p>
+        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約10時間</p>
     </footer>
 
     <script src="script.js"></script>

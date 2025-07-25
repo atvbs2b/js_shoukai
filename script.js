@@ -8,17 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const allNavLinks = document.querySelectorAll('#mobile-nav a, #main-nav a');
 
     // ハンバーガーメニュークリック時の処理
-    if (hamburgerMenu) {
-        hamburgerMenu.addEventListener('click', () => {
-            // mobile-nav要素に'active'クラスをトグルする
-            // 'active'クラスはCSSで定義され、メニューの表示/非表示を制御する
-            if (mobileNav) {
-                mobileNav.classList.toggle('active');
-            }
+    if (hamburgerMenu && mobileNav) {
+        hamburgerMenu.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileNav.classList.toggle('active');
         });
     }
 
-    // ナビゲーションリンクがクリックされた時の処理 (モバイルとデスクトップ両方)
+    // ナビゲーションリンクがクリックされた時の処理
     allNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             // モバイルメニューが表示されている場合、リンククリックで閉じる
@@ -26,6 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileNav.classList.remove('active');
             }
         });
+    });
+
+    // 外側をクリックした時にメニューを閉じる
+    document.addEventListener('click', (e) => {
+        if (mobileNav && mobileNav.classList.contains('active')) {
+            if (!hamburgerMenu.contains(e.target) && !mobileNav.contains(e.target)) {
+                mobileNav.classList.remove('active');
+            }
+        }
+    });
+
+    // ウィンドウリサイズ時にモバイルメニューを閉じる
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && mobileNav && mobileNav.classList.contains('active')) {
+            mobileNav.classList.remove('active');
+        }
     });
 
     // お絵かきボードのロジック
@@ -102,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
             canvasContainer.innerHTML = '<p class="text-red-500">お使いのブラウザはCanvas要素をサポートしていません。</p>';
         }
     }
-
 
     // カウンターアプリケーションのロジック
     const countDisplay = document.getElementById('count-display');

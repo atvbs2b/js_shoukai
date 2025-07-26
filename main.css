@@ -341,9 +341,9 @@ p {
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 600;
-    color: #2563eb;
+    color: #223868;
     margin: 2rem 0 1rem 0;
 }
 
@@ -411,6 +411,17 @@ img {
     box-shadow: var(--shadow-xl);
     display: block;
     margin: 1.5rem auto;
+}
+
+/* インライン画像（絵文字スタイル） */
+.inline-icon {
+    display: inline;
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0 0 0 0.3em;
+    vertical-align: middle;
+    border-radius: 0.2rem;
+    box-shadow: none;
 }
 
 /* ===== インタラクティブ要素 ===== */

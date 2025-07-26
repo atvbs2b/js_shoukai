@@ -1,4 +1,4 @@
-/* main.css - 改善版 */
+/* main.css - 修正版（ハンバーガーメニュー対応） */
 
 /* フォントのインポート */
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Merriweather:wght@900&family=Kosugi+Maru&display=swap');
@@ -125,7 +125,7 @@ header {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* モバイルナビゲーション */
+/* モバイルナビゲーション - 修正済み */
 #mobile-nav {
     background-color: var(--mobile-nav-bg);
     color: var(--white);
@@ -136,11 +136,16 @@ header {
     left: 0;
     right: 0;
     z-index: 20;
-    display: none;
+    display: none; /* デフォルトで非表示 */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
 }
 
 #mobile-nav.active {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #mobile-nav ul {
@@ -457,11 +462,6 @@ footer p {
         display: none;
     }
     
-    /* モバイルナビを表示 */
-    #mobile-nav {
-        display: block;
-    }
-    
     .box5-5 {
         padding: 2.5rem 1rem 1.5rem;
         margin-bottom: 1.5rem;
@@ -512,10 +512,6 @@ footer p {
     #hamburger-menu {
         display: none;
     }
-    
-    #mobile-nav {
-        display: none !important;
-    }
 }
 
 /* デスクトップ (1024px〜) */
@@ -534,10 +530,6 @@ footer p {
     
     #hamburger-menu {
         display: none;
-    }
-    
-    #mobile-nav {
-        display: none !important;
     }
     
     .box5-5 {

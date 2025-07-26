@@ -1,4 +1,4 @@
-// script.js
+// script.js - 修正版（ハンバーガーメニュー対応）
 
 document.addEventListener('DOMContentLoaded', () => {
     // ハンバーガーメニューの要素を取得
@@ -100,6 +100,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // マウスが離れた時、またはキャンバスから出た時の処理
         drawingCanvas.addEventListener('mouseup', () => isDrawing = false);
         drawingCanvas.addEventListener('mouseout', () => isDrawing = false);
+
+        // タッチデバイス対応（スマートフォン・タブレット）
+        drawingCanvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = drawingCanvas.getBoundingClientRect();
+            isDrawing = true;
+            [lastX, lastY] = [
+                touch.clientX - rect.left,
+                touch.clientY - rect.top
+            ];
+        });
+
+        drawingCanvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!isDrawing) return;
+
+            const touch = e.touches[0];
+            const rect = drawingCanvas.getBoundingClientRect();
+            const currentX = touch.clientX - rect.left;
+            const currentY = touch.clientY - rect.top;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+
+            [lastX, lastY] = [currentX, currentY];
+        });
+
+        drawingCanvas.addEventListener('touchend', () => isDrawing = false);
+        drawingCanvas.addEventListener('touchcancel', () => isDrawing = false);
 
         // キャンバスをクリアするボタンのイベントリスナー
         if (clearCanvasBtn) {

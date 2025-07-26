@@ -1,27 +1,96 @@
-// script.js - 修正版（ハンバーガーメニュー対応）
+// script.js - スワイプ対応ハンバーガーメニュー版
 
 document.addEventListener('DOMContentLoaded', () => {
     // ハンバーガーメニューの要素を取得
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const mobileNav = document.getElementById('mobile-nav');
+    const header = document.querySelector('header');
     // モバイルメニューとメインナビゲーションのリンクをすべて取得
     const allNavLinks = document.querySelectorAll('#mobile-nav a, #main-nav a');
 
-    // ハンバーガーメニュークリック時の処理
+    // スワイプジェスチャーの設定
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let isSwiping = false;
+
+    // スワイプの最小距離（ピクセル）
+    const MIN_SWIPE_DISTANCE = 50;
+    // 垂直方向の許容範囲（ピクセル）
+    const MAX_VERTICAL_DISTANCE = 100;
+
+    // ハンバーガーメニューの表示/非表示を制御する関数
+    const toggleMobileMenu = () => {
+        if (mobileNav) {
+            mobileNav.classList.toggle('active');
+        }
+    };
+
+    // ハンバーガーメニューを閉じる関数
+    const closeMobileMenu = () => {
+        if (mobileNav && mobileNav.classList.contains('active')) {
+            mobileNav.classList.remove('active');
+        }
+    };
+
+    // ハンバーガーメニューボタンクリック時の処理
     if (hamburgerMenu && mobileNav) {
         hamburgerMenu.addEventListener('click', (e) => {
             e.preventDefault();
-            mobileNav.classList.toggle('active');
+            toggleMobileMenu();
         });
     }
+
+    // タッチイベントの処理（スワイプジェスチャー）
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isSwiping = true;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isSwiping) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        
+        handleSwipe();
+        isSwiping = false;
+    }, { passive: true });
+
+    // スワイプジェスチャーの判定と処理
+    const handleSwipe = () => {
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // 垂直方向のスワイプが大きすぎる場合は無視
+        if (deltaY > MAX_VERTICAL_DISTANCE) return;
+        
+        // 右スワイプ（メニューを開く）
+        if (deltaX > MIN_SWIPE_DISTANCE && window.innerWidth < 768) {
+            if (mobileNav && !mobileNav.classList.contains('active')) {
+                mobileNav.classList.add('active');
+            }
+        }
+        
+        // 左スワイプ（メニューを閉じる）
+        if (deltaX < -MIN_SWIPE_DISTANCE && window.innerWidth < 768) {
+            closeMobileMenu();
+        }
+    };
 
     // ナビゲーションリンクがクリックされた時の処理
     allNavLinks.forEach(link => {
         link.addEventListener('click', () => {
-            // モバイルメニューが表示されている場合、リンククリックで閉じる
-            if (mobileNav && mobileNav.classList.contains('active')) {
-                mobileNav.classList.remove('active');
-            }
+            closeMobileMenu();
         });
     });
 
@@ -29,16 +98,51 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (mobileNav && mobileNav.classList.contains('active')) {
             if (!hamburgerMenu.contains(e.target) && !mobileNav.contains(e.target)) {
-                mobileNav.classList.remove('active');
+                closeMobileMenu();
             }
         }
     });
 
     // ウィンドウリサイズ時にモバイルメニューを閉じる
     window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768 && mobileNav && mobileNav.classList.contains('active')) {
-            mobileNav.classList.remove('active');
+        if (window.innerWidth >= 768) {
+            closeMobileMenu();
         }
+    });
+
+    // スクロール時のヘッダー固定処理
+    let lastScrollTop = 0;
+    let scrollThreshold = 10; // スクロールの閾値
+
+    const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (Math.abs(scrollTop - lastScrollTop) < scrollThreshold) {
+            return;
+        }
+
+        if (header) {
+            if (scrollTop > 100) {
+                // 100px以上スクロールしたらヘッダーを固定
+                header.classList.add('fixed-header');
+                document.body.classList.add('header-fixed');
+            } else {
+                // トップ付近に戻ったら固定を解除
+                header.classList.remove('fixed-header');
+                document.body.classList.remove('header-fixed');
+            }
+        }
+
+        lastScrollTop = scrollTop;
+    };
+
+    // スクロールイベントをスロットル処理で最適化
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+        if (scrollTimer !== null) {
+            clearTimeout(scrollTimer);
+        }
+        scrollTimer = setTimeout(handleScroll, 10);
     });
 
     // お絵かきボードのロジック
@@ -48,62 +152,53 @@ document.addEventListener('DOMContentLoaded', () => {
     if (drawingCanvas && drawingCanvas.getContext) {
         const ctx = drawingCanvas.getContext('2d');
 
-        let isDrawing = false; // 描画中かどうかを示すフラグ
-        let lastX = 0; // 最後に描画したX座標
-        let lastY = 0; // 最後に描画したY座標
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
 
-        // キャンバスのサイズを親要素に合わせて設定する関数
         const resizeCanvas = () => {
-            // CSSで設定された表示サイズに合わせて、Canvasの内部解像度を設定
             drawingCanvas.width = drawingCanvas.offsetWidth;
             drawingCanvas.height = drawingCanvas.offsetHeight;
-            // 解像度変更後に線のスタイルを再設定（リセットされるため）
-            ctx.strokeStyle = '#000000'; // 黒色
-            ctx.lineWidth = 3; // 線の太さ
-            ctx.lineJoin = 'round'; // 線と線の結合部分を丸くする
-            ctx.lineCap = 'round'; // 線の端を丸くする
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
         };
 
-        // 初期ロード時とウィンドウリサイズ時にキャンバスのサイズを設定
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // 線のスタイルを設定
-        // resizeCanvas関数内で設定済みだが、念のためここでも設定
-        ctx.strokeStyle = '#000000'; // 黒色
-        ctx.lineWidth = 3; // 線の太さ
-        ctx.lineJoin = 'round'; // 線と線の結合部分を丸くする
-        ctx.lineCap = 'round'; // 線の端を丸くする
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 3;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
 
-        // マウスが押された時の処理
+        // マウスイベント
         drawingCanvas.addEventListener('mousedown', (e) => {
-            e.preventDefault(); // デフォルトの動作（テキスト選択など）を防ぐ
+            e.preventDefault();
             isDrawing = true;
-            // offsetX, offsetYはイベント発生要素の左上からの相対座標
             [lastX, lastY] = [e.offsetX, e.offsetY];
         });
 
-        // マウスが動いた時の処理
         drawingCanvas.addEventListener('mousemove', (e) => {
-            e.preventDefault(); // デフォルトの動作を防ぐ
-            if (!isDrawing) return; // 描画中でなければ何もしない
+            e.preventDefault();
+            if (!isDrawing) return;
 
-            ctx.beginPath(); // 新しいパスを開始
-            ctx.moveTo(lastX, lastY); // 前回の位置から開始
-            ctx.lineTo(e.offsetX, e.offsetY); // 現在の位置まで線を引く
-            ctx.stroke(); // 線を描画
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
 
-            // 現在の位置を次の開始点として記録
             [lastX, lastY] = [e.offsetX, e.offsetY];
         });
 
-        // マウスが離れた時、またはキャンバスから出た時の処理
         drawingCanvas.addEventListener('mouseup', () => isDrawing = false);
         drawingCanvas.addEventListener('mouseout', () => isDrawing = false);
 
-        // タッチデバイス対応（スマートフォン・タブレット）
+        // タッチイベント（お絵かき用）- メニュースワイプと競合しないよう調整
         drawingCanvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
+            e.stopPropagation(); // メニュースワイプとの競合を防ぐ
             const touch = e.touches[0];
             const rect = drawingCanvas.getBoundingClientRect();
             isDrawing = true;
@@ -115,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         drawingCanvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
+            e.stopPropagation(); // メニュースワイプとの競合を防ぐ
             if (!isDrawing) return;
 
             const touch = e.touches[0];
@@ -130,18 +226,23 @@ document.addEventListener('DOMContentLoaded', () => {
             [lastX, lastY] = [currentX, currentY];
         });
 
-        drawingCanvas.addEventListener('touchend', () => isDrawing = false);
-        drawingCanvas.addEventListener('touchcancel', () => isDrawing = false);
+        drawingCanvas.addEventListener('touchend', (e) => {
+            e.stopPropagation(); // メニュースワイプとの競合を防ぐ
+            isDrawing = false;
+        });
+        
+        drawingCanvas.addEventListener('touchcancel', (e) => {
+            e.stopPropagation();
+            isDrawing = false;
+        });
 
-        // キャンバスをクリアするボタンのイベントリスナー
         if (clearCanvasBtn) {
             clearCanvasBtn.addEventListener('click', () => {
-                ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height); // キャンバス全体をクリア
+                ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
             });
         }
 
     } else if (drawingCanvas) {
-        // Canvas要素は存在するがgetContextが使えない場合
         const canvasContainer = drawingCanvas.parentElement;
         if (canvasContainer) {
             canvasContainer.innerHTML = '<p class="text-red-500">お使いのブラウザはCanvas要素をサポートしていません。</p>';
@@ -153,27 +254,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const decrementBtn = document.getElementById('decrement-btn');
     const incrementBtn = document.getElementById('increment-btn');
 
-    // カウンター関連の要素が存在する場合のみ処理を実行
     if (countDisplay && decrementBtn && incrementBtn) {
-        let count = 0; // カウンターの初期値
+        let count = 0;
 
-        // カウント表示を更新する関数
         function updateCountDisplay() {
             countDisplay.textContent = count;
         }
 
-        // デクリメントボタンのイベントリスナー
         decrementBtn.addEventListener('click', () => {
-            count--; // カウントを減らす
-            updateCountDisplay(); // 表示を更新
+            count--;
+            updateCountDisplay();
         });
 
-        // インクリメントボタンのイベントリスナー
         incrementBtn.addEventListener('click', () => {
-            count++; // カウントを増やす
-            updateCountDisplay(); // 表示を更新
+            count++;
+            updateCountDisplay();
         });
 
-        updateCountDisplay(); // ページ読み込み時に初期値を表示
+        updateCountDisplay();
     }
 });

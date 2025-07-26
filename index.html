@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript入門：ウェブを動かす魔法の言語</title>
+    <title>JavaScript入門！</title>
     <!-- Tailwind CSS CDNを最初に読み込むことで、カスタムCSSがTailwindのユーティリティクラスを上書きできるようにする -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="main.css">
@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="#overview">JavaScriptの概要</a></li>
                     <li><a href="#basics">JavaScriptの基本</a></li>
-                    <li><a href="#counter">カウンターを体験</a></li>
+                    <li><a href="#counter">カウンター</a></li>
                     <li><a href="#drawing">お絵かきボード</a></li>
                     <li><a href="#applications">活用例</a></li>
                 </ul>
@@ -35,7 +35,7 @@
             <ul>
                 <li><a href="#overview">JavaScriptの概要</a></li>
                 <li><a href="#basics">JavaScriptの基本</a></li>
-                <li><a href="#counter">カウンターを体験</a></li>
+                <li><a href="#counter">カウンター</a></li>
                 <li><a href="#drawing">お絵かきボード</a></li>
                 <li><a href="#applications">活用例</a></li>
             </ul>
@@ -55,7 +55,8 @@
             <p class="text-sm text-gray-600 mt-2">
                 <a target="_blank" href="https://icons8.com/icon/108784/javascript">JavaScript</a> アイコン by <a target="_blank" href="https://icons8.com">Icons8</a>
             </p>
-            <h3>JavaScriptの主な特徴</h3>
+            <br>
+            <h3><strong>JavaScriptの主な特徴</strong></h3>
             <ul>
                 <li><strong>インタプリタ型言語:</strong> コンパイル不要でブラウザが直接実行します。</li>
                 <li><strong>イベント駆動型:</strong> ユーザーのクリックやキー入力などのイベントに応じて処理を実行します。</li>
@@ -73,8 +74,8 @@
             <p>
                 JavaScriptを学ぶ上で、まず理解すべき基本的な概念を解説します。これらの要素は、どのようなJavaScriptプログラムでも共通して使われる土台となります。ウェブページでのインタラクティブな動きや、データの処理を行うために不可欠な知識です。
             </p>
-
-            <h3>変数とデータ型</h3>
+            <br>
+            <h3><strong>変数とデータ型</strong></h3>
             <p>
                 変数は、プログラムの中で扱うデータを一時的に保存するための「名前付きの箱」のようなものです。この箱には、数値、テキスト、真偽（はい/いいえ）などの様々な種類のデータを入れることができます。JavaScriptでは、主に以下の3つのキーワードを使って変数を宣言できます。
             </p>
@@ -83,6 +84,7 @@
                 <li><code><strong>const</strong></code><strong>:</strong> 再代入が不可能な定数を宣言します。一度値を設定したら、その値は変更されません。固定された値を扱う場合に利用します。</li>
                 <li><code><strong>var</strong></code><strong>:</strong> 以前から使われているキーワードですが、現代のJavaScriptでは<code>let</code>や<code>const</code>の使用が推奨されています。</li>
             </ul>
+            <br>
             <p>
                 変数が保持するデータの種類を「データ型」と呼びます。JavaScriptには以下のような主要なデータ型があります。
             </p>
@@ -116,7 +118,7 @@ console.log(colors[0]); // 配列の最初の要素にアクセス。出力: "�
 console.log(user.name); // オブジェクトのプロパティにアクセス。出力: "山田"
             </code></pre>
 
-            <h3>演算子</h3>
+            <h3><strong>演算子</strong></h3>
             <p>
                 演算子は、変数や値に対して様々な計算や比較、論理的な操作を行うための記号です。これらを使うことで、データを加工したり、条件を判定したりすることができます。
             </p>
@@ -150,7 +152,7 @@ console.log("厳密な比較 (a === \"10\"): " + isStrictEqual); // 出力: 厳�
 console.log("論理ORの結果: " + resultOr); // 出力: 論理ORの結果: true
             </code></pre>
 
-            <h3>制御フロー (条件分岐・繰り返し)</h3>
+            <h3><strong>制御フロー (条件分岐・繰り返し)</strong></h3>
             <p>
                 プログラムは通常、上から下へと順番に実行されますが、「制御フロー」を使うことで、特定の条件に応じて実行するコードを変えたり、同じ処理を何度も繰り返したりすることができます。
             </p>
@@ -191,7 +193,7 @@ while (count < 2) { // countが2未満の間繰り返す
 // 現在のカウント: 1
             </code></pre>
 
-            <h3>関数</h3>
+            <h3><strong>関数</strong></h3>
             <p>
                 関数は、特定の処理をひとまとまりにした「再利用可能なコードのブロック」です。同じ処理を何度も書く手間を省き、プログラムを整理し、読みやすくするために非常に重要です。関数は、引数（入力）を受け取り、処理を行い、結果を返すことができます。
             </p>
@@ -199,7 +201,7 @@ while (count < 2) { // countが2未満の間繰り返す
                 <li><strong>関数の定義:</strong> <code>function</code>キーワードを使って関数を定義します。</li>
                 <li><strong>関数の呼び出し:</strong> 定義した関数は、その名前を使ってどこからでも呼び出すことができます。</li>
                 <li><strong>引数と戻り値:</strong> 関数に渡す値を「引数」、関数が返す値を「戻り値」と呼びます。</li>
-                <li><strong>匿名関数とアロー関数:</strong> 関数には名前がない「匿名関数」や、より簡潔に書ける「アロー関数」といった書き方もあります。</li>
+                <li><strong>匿名関数・アロー関数:</strong> 関数には名前がない「匿名関数」や、より簡潔に書ける「アロー関数」といった書き方もあります。</li>
             </ul>
             <pre><code>
 // 関数の定義の例：挨拶メッセージを生成する関数
@@ -241,9 +243,9 @@ console.log("4 * 2 = " + multiply(4, 2)); // 出力: 4 * 2 = 8
                     </button>
                 </div>
             </div>
-            <h3>カウンターコードの解説</h3>
+            <h3><strong>カウンターコードの解説</strong></h3>
             <p>
-                以下は、カウンタープログラムのJavaScriptコードです。各行が何をしているのか、そしてそれがJavaScriptのどの基本概念と結びついているのかを詳しく見ていきましょう。
+                以下は、カウンタープログラムのJavaScriptコードです。各行が何をしているのかを詳しく見ていきましょう。
             </p>
             <pre><code>
 // カウンターの要素を取得
@@ -258,13 +260,13 @@ function updateCountDisplay() { // (5)
     countDisplay.textContent = count; // (6)
 }
 
-// デクリメントボタンのイベントリスナー
+// カウントを減らすボタンのイベントリスナー
 decrementBtn.addEventListener('click', () => { // (7)
     count--; // カウントを減らす (8)
     updateCountDisplay(); // 表示を更新 (9)
 });
 
-// インクリメントボタンのイベントリスナー
+// カウントを増やすボタンのイベントリスナー
 incrementBtn.addEventListener('click', () => { // (10)
     count++; // カウントを増やす (11)
     updateCountDisplay(); // 表示を更新 (12)
@@ -276,81 +278,78 @@ updateCountDisplay(); // ページ読み込み時に初期値を表示 (13)
                 このコードのポイントは以下の通りです。
             </p>
             <ol>
-                <li><strong>(1) `const countDisplay = document.getElementById('count-display');`</strong><br>
+                <li><strong>(1) const countDisplay = document.getElementById('count-display');</strong><br>
                     <p>
-                        まず、HTMLファイルの中にある、`id`が`count-display`と設定された要素（この場合は数字が表示される`&lt;div&gt;`タグ）をJavaScriptで探し出し、`countDisplay`という名前の定数（<code>const</code>）に保存しています。これにより、JavaScriptからこのHTML要素を「操作の対象」として扱えるようになります。
+                        まず、HTMLファイルの中にある、"id"が"count-display"と設定された要素（この場合は数字が表示される"&lt;div&gt;"タグ）をJavaScriptで探し出し、"countDisplay"という名前の定数（<code>const</code>）に保存しています。これにより、JavaScriptからこのHTML要素を「操作の対象」として扱えるようになります。
                     </p>
                 </li>
-                <li><strong>(2) `const decrementBtn = document.getElementById('decrement-btn');`</strong><br>
+                <li><strong>(2) const decrementBtn = document.getElementById('decrement-btn');</strong><br>
                     <p>
-                        同様に、`id`が`decrement-btn`と設定された「-1」ボタンのHTML要素をJavaScriptで取得し、`decrementBtn`という定数に保存しています。
+                        同様に、"id"が"decrement-btn"と設定された「-1」ボタンのHTML要素をJavaScriptで取得し、"decrementBtn"という定数に保存しています。
                     </p>
                 </li>
-                <li><strong>(3) `const incrementBtn = document.getElementById('increment-btn');`</strong><br>
+                <li><strong>(3) const incrementBtn = document.getElementById('increment-btn');</strong><br>
                     <p>
-                        そして、`id`が`increment-btn`と設定された「+1」ボタンのHTML要素をJavaScriptで取得し、`incrementBtn`という定数に保存しています。これら3つの行は、プログラムがHTML上の特定の部品（要素）を見つけて、それらを操作するための準備です。
+                        そして、"id"が"increment-btn"と設定された「+1」ボタンのHTML要素をJavaScriptで取得し、"incrementBtn"という定数に保存しています。これら3つの行は、プログラムがHTML上の特定の部品（要素）を見つけて、それらを操作するための準備です。
                     </p>
                 </li>
-                <li><strong>(4) `let count = 0;`</strong><br>
+                <li><strong>(4) let count = 0;</strong><br>
                     <p>
-                        これは、カウンターの現在の値を記憶しておくための「変数」です。<code>let</code>キーワードで宣言されているので、後からこの`count`の値を増減させることができます。最初は`0`からスタートします。
+                        これは、カウンターの現在の値を記憶しておくための「変数」です。<code>let</code>キーワードで宣言されているので、後からこの"count"の値を増減させることができます。最初は"0"からスタートします。
                     </p>
                 </li>
-                <li><strong>(5) `function updateCountDisplay() { ... }`</strong><br>
+                <li><strong>(5) function updateCountDisplay() { ... }</strong><br>
                     <p>
-                        これは「関数」と呼ばれるもので、特定の処理のまとまりに名前を付けたものです。この`updateCountDisplay`関数は、`count`変数の値を、ウェブページに表示されているカウンターの数字（`countDisplay`要素）に反映させる役割を持っています。同じ表示更新の処理を何度も書かずに済むので、コードがすっきりします。
+                        これは「関数」で、特定の処理のまとまりに名前を付けたものです。この"updateCountDisplay"関数は、"count"変数の値を、ウェブページに表示されているカウンターの数字（"countDisplay"要素）に反映させる役割を持っています。同じ表示更新の処理を何度も書かずに済むので、コードがすっきりします。
                     </p>
                 </li>
-                <li><strong>(6) `countDisplay.textContent = count;`</strong><br>
+                <li><strong>(6) countDisplay.textContent = count;</strong><br>
                     <p>
-                        `updateCountDisplay`関数の中身です。`countDisplay`というHTML要素の`textContent`プロパティ（要素のテキスト内容）を、現在の`count`変数の値に書き換えています。これにより、画面に表示されている数字がリアルタイムで更新されます。
+                        "updateCountDisplay"関数の中身です。"countDisplay"というHTML要素の"textContent"プロパティ（要素のテキスト内容）を、現在の"count"変数の値に書き換えています。これにより、画面に表示されている数字がリアルタイムで更新されます。
                     </p>
                 </li>
-                <li><strong>(7) `decrementBtn.addEventListener('click', () => { ... });`</strong><br>
+                <li><strong>(7) decrementBtn.addEventListener('click', () => { ... });</strong><br>
                     <p>
-                        これが「イベントリスナー」の登録です。`decrementBtn`（「-1」ボタン）が「クリックされた」というイベント（`click`）をJavaScriptが検知したら、その直後に続くアロー関数`() => { ... }`の中の処理を実行するように設定しています。
+                        これが「イベントリスナー」の登録です。"decrementBtn"（「-1」ボタン）が「クリックされた」というイベント（"click"）をJavaScriptが検知したら、その直後に続くアロー関数"() => { ... }"の中の処理を実行するように設定しています。
                     </p>
                 </li>
-                <li><strong>(8) `count--;`</strong><br>
+                <li><strong>(8) count--;</strong><br>
                     <p>
-                        「-1」ボタンがクリックされたときに実行される処理の一つです。`count`変数の値を1だけ減らしています。これは`count = count - 1;`と全く同じ意味です。
+                        「-1」ボタンがクリックされたときに実行される処理の一つです。"count"変数の値を1だけ減らしています。これは"count = count - 1;"と全く同じ意味です。
                     </p>
                 </li>
-                <li><strong>(9) `updateCountDisplay();`</strong><br>
+                <li><strong>(9) updateCountDisplay();</strong><br>
                     <p>
-                        `count`の値が変わったので、画面上の表示も新しい値に更新するために、先ほど定義した`updateCountDisplay`関数を呼び出しています。
+                        "count"の値が変わったので、画面上の表示も新しい値に更新するために、先ほど定義した"updateCountDisplay"関数を呼び出しています。
                     </p>
                 </li>
-                <li><strong>(10) `incrementBtn.addEventListener('click', () => { ... });`</strong><br>
+                <li><strong>(10) incrementBtn.addEventListener('click', () => { ... });</strong><br>
                     <p>
                         「+1」ボタンについても同様に、クリックイベントを検知したら、その後の処理を実行するように設定しています。
                     </p>
                 </li>
-                <li><strong>(11) `count++;`</strong><br>
+                <li><strong>(11) count++;</strong><br>
                     <p>
-                        「+1」ボタンがクリックされたときに実行される処理です。`count`変数の値を1だけ増やしています。これは`count = count + 1;`と全く同じ意味です。
+                        「+1」ボタンがクリックされたときに実行される処理です。"count"変数の値を1だけ増やしています。これは"count = count + 1;"と全く同じ意味です。
                     </p>
                 </li>
-                <li><strong>(12) `updateCountDisplay();`</strong><br>
+                <li><strong>(12) updateCountDisplay();</strong><br>
                     <p>
-                        `count`の値が変わったので、画面上の表示を更新するために`updateCountDisplay`関数を呼び出しています。
+                        "count"の値が変わったので、画面上の表示を更新するために"updateCountDisplay"関数を呼び出しています。
                     </p>
                 </li>
-                <li><strong>(13) `updateCountDisplay();`</strong><br>
+                <li><strong>(13) updateCountDisplay();</strong><br>
                     <p>
-                        この行は、ウェブページが読み込まれた直後（JavaScriptのコードが実行され始めたとき）に、カウンターの初期値である`0`が画面に正しく表示されるように、一度だけ`updateCountDisplay`関数を呼び出しています。これにより、ページを開いた瞬間に数字がきちんと表示されます。
+                        この行は、ウェブページが読み込まれた直後（JavaScriptのコードが実行され始めたとき）に、カウンターの初期値である"0"が画面に正しく表示されるように、一度だけ"updateCountDisplay"関数を呼び出しています。これにより、ページを開いた瞬間に数字がきちんと表示されます。
                     </p>
                 </li>
             </ol>
-            <p class="leading-relaxed">
-                このカウンタープログラムは、ユーザーの操作（クリック）を検知し、それに応じて画面上の要素（数字）を動的に変更するという、ウェブアプリケーションの基本的な仕組みを理解する上で非常に良い例です。
-            </p>
         </section>
 
         <section id="drawing" class="box5-5">
-            <h2 class="heading-16">JavaScriptでお絵かきボード！</h2>
+            <h2 class="heading-16">お絵かきボードを体験しよう！</h2>
             <p>
-                JavaScriptとHTMLの`&lt;canvas&gt;`要素を使えば、ウェブページ上で自由にお絵かきができます。マウスをドラッグして、自分だけの絵を描いてみましょう！
+                JavaScriptとHTMLの"&lt;canvas&gt;"要素を使えば、ウェブページ上で自由にお絵かきができます。マウスをドラッグして、自分だけの絵を描いてみましょう！
                 このお絵かきボードは、JavaScriptの<strong>イベント処理</strong>と<strong>DOM操作</strong>、そして<code>&lt;canvas&gt;</code>要素を使った<strong>グラフィックス描画</strong>の組み合わせで実現されています。
             </p>
             <div class="flex-center">
@@ -360,9 +359,9 @@ updateCountDisplay(); // ページ読み込み時に初期値を表示 (13)
                 </button>
                 <p class="text-center text-sm text-gray-600">上記キャンバスにマウスで絵を描けます。</p>
             </div>
-            <h3>お絵かきコードの解説</h3>
+            <h3><strong>お絵かきコードの解説</strong></h3>
             <p>
-                以下は、お絵かきボードのJavaScriptコードです。各行が何をしているのか、そしてそれがJavaScriptのどの基本概念と結びついているのかを詳しく見ていきましょう。
+                以下は、お絵かきボードのJavaScriptコードです。各行が何をしているのかを詳しく見ていきましょう。
             </p>
             <pre><code>
 // HTMLのcanvas要素を取得
@@ -410,141 +409,137 @@ clearButton.addEventListener('click', () => { // (23)
                 このコードのポイントは以下の通りです。
             </p>
             <ol>
-                <li><strong>(1) `const canvas = document.getElementById('drawingCanvas');`</strong><br>
+                <li><strong>(1) const canvas = document.getElementById('drawingCanvas');</strong><br>
                     <p>
-                        HTMLファイルの中にある、`id`が`drawingCanvas`と設定された<code>&lt;canvas&gt;</code>要素をJavaScriptで探し出し、`canvas`という名前の定数（<code>const</code>）に保存しています。これにより、JavaScriptからこの描画領域を操作できるようになります。
+                        HTMLファイルの中にある、"id"が"drawingCanvas"と設定された<code>&lt;canvas&gt;</code>要素をJavaScriptで探し出し、"canvas"という名前の定数（<code>const</code>）に保存しています。これにより、JavaScriptからこの描画領域を操作できるようになります。
                     </p>
                 </li>
-                <li><strong>(2) `const ctx = canvas.getContext('2d');`</strong><br>
+                <li><strong>(2) const ctx = canvas.getContext('2d');</strong><br>
                     <p>
-                        <code>&lt;canvas&gt;</code>要素に実際に絵を描くためには、「描画コンテキスト」というものが必要です。`canvas.getContext('2d')`とすることで、2Dグラフィックスを描画するための様々な機能（線を描く、色を塗るなど）を使えるようになります。取得したコンテキストは`ctx`という定数に保存しています。
+                        <code>&lt;canvas&gt;</code>要素に実際に絵を描くためには、「描画コンテキスト」というものが必要です。"canvas.getContext('2d')"とすることで、2Dグラフィックスを描画するための様々な機能（線を描く、色を塗るなど）を使えるようになります。取得したコンテキストは"ctx"という定数に保存しています。
                     </p>
                 </li>
-                <li><strong>(3) `let isDrawing = false;`</strong><br>
+                <li><strong>(3) let isDrawing = false;</strong><br>
                     <p>
-                        これは「変数」で、ユーザーが現在マウスをドラッグして絵を描いている最中かどうかを管理するための「真偽値」（<code>true</code>か<code>false</code>）です。最初は`false`（描画中でない）に設定されています。
+                        これは「変数」で、ユーザーが現在マウスをドラッグして絵を描いている最中かどうかを管理するための「真偽値」（<code>true</code>か<code>false</code>）です。最初は"false"（描画中でない）に設定されています。
                     </p>
                 </li>
-                <li><strong>(4) `let lastX = 0;` と (5) `let lastY = 0;`</strong><br>
+                <li><strong>(4) let lastX = 0; (5) let lastY = 0;</strong><br>
                     <p>
                         これらも「変数」で、線を描くときに「前回どこにいたか」という点のX座標とY座標を記憶しておくために使います。マウスが動くたびに、前回の点から現在の点へ線を描くことで、連続した線に見えるようにします。
                     </p>
                 </li>
-                <li><strong>(6)〜(9) 線のスタイル設定 (`ctx.strokeStyle`, `ctx.lineWidth`, `ctx.lineJoin`, `ctx.lineCap`)</strong><br>
+                <li><strong>(6)〜(9) 線のスタイル設定 ("ctx.strokeStyle", "ctx.lineWidth", "ctx.lineJoin", "ctx.lineCap")</strong><br>
                     <p>
-                        `ctx`（描画コンテキスト）のプロパティを使って、これから描く線の見た目を設定しています。
+                        "ctx"（描画コンテキスト）のプロパティを使って、これから描く線の見た目を設定しています。
                         <ul>
-                            <li>`ctx.strokeStyle = '#000000';`：線の色を黒（16進数カラーコード）に設定します。</li>
-                            <li>`ctx.lineWidth = 3;`：線の太さを3ピクセルに設定します。</li>
-                            <li>`ctx.lineJoin = 'round';`：線と線が交わる部分（角）を丸くします。</li>
-                            <li>`ctx.lineCap = 'round';`：線の端（始点と終点）を丸くします。</li>
+                            <li>"ctx.strokeStyle = '#000000';"：線の色を黒（16進数カラーコード）に設定します。</li>
+                            <li>"ctx.lineWidth = 3;"：線の太さを3ピクセルに設定します。</li>
+                            <li>"ctx.lineJoin = 'round';"：線と線が交わる部分（角）を丸くします。</li>
+                            <li>"ctx.lineCap = 'round';"：線の端（始点と終点）を丸くします。</li>
                         </ul>
                         これらの設定により、滑らかな線が描けるようになります。
                     </p>
                 </li>
-                <li><strong>(10) `canvas.addEventListener('mousedown', (e) => { ... });`</strong><br>
+                <li><strong>(10) canvas.addEventListener('mousedown', (e) => { ... });</strong><br>
                     <p>
-                        これは「イベントリスナー」の登録です。`canvas`要素上でマウスのボタンが「押された」とき（`mousedown`イベント）に、その直後に続くアロー関数`() => { ... }`の中の処理を実行するように設定しています。`e`はイベントオブジェクトで、マウスが押された位置などの情報が含まれています。
+                        これは「イベントリスナー」の登録です。"canvas"要素上でマウスのボタンが「押された」とき（"mousedown"イベント）に、その直後に続くアロー関数"() => { ... }"の中の処理を実行するように設定しています。"e"はイベントオブジェクトで、マウスが押された位置などの情報が含まれています。
                     </p>
                 </li>
-                <li><strong>(11) `isDrawing = true;`</strong><br>
+                <li><strong>(11) isDrawing = true;</strong><br>
                     <p>
-                        マウスが押されたので、「今から絵を描き始めるよ」という状態にするために、`isDrawing`変数を`true`に設定しています。
+                        マウスが押されたので、「今から絵を描き始めるよ」という状態にするために、"isDrawing"変数を"true"に設定しています。
                     </p>
                 </li>
-                <li><strong>(12) `[lastX, lastY] = [e.offsetX, e.offsetY];`</strong><br>
+                <li><strong>(12) [lastX, lastY] = [e.offsetX, e.offsetY];</strong><br>
                     <p>
-                        マウスが押された瞬間のX座標（`e.offsetX`）とY座標（`e.offsetY`）を、それぞれ`lastX`と`lastY`に保存しています。これが、線を描き始める最初の点になります。
+                        マウスが押された瞬間のX座標（"e.offsetX"）とY座標（"e.offsetY"）を、それぞれ"lastX"と"lastY"に保存しています。これが、線を描き始める最初の点になります。
                     </p>
                 </li>
-                <li><strong>(13) `canvas.addEventListener('mousemove', (e) => { ... });`</strong><br>
+                <li><strong>(13) canvas.addEventListener('mousemove', (e) => { ... });</strong><br>
                     <p>
-                        `canvas`要素上でマウスが「動いた」とき（`mousemove`イベント）に、指定された関数を実行するように設定しています。このイベントはマウスが少しでも動くたびに何度も発生します。
+                        "canvas"要素上でマウスが「動いた」とき（"mousemove"イベント）に、指定された関数を実行するように設定しています。このイベントはマウスが少しでも動くたびに何度も発生します。
                     </p>
                 </li>
-                <li><strong>(14) `if (!isDrawing) return;`</strong><br>
+                <li><strong>(14) if (!isDrawing) return;</strong><br>
                     <p>
-                        `mousemove`イベントが発生しても、もし`isDrawing`が`false`（つまりマウスが押されていない状態）であれば、それ以降の描画処理は行わずに、この関数をすぐに終了します。これにより、マウスをドラッグしている間だけ線が描かれるようになります。
+                        "mousemove"イベントが発生しても、もし"isDrawing"が"false"（つまりマウスが押されていない状態）であれば、それ以降の描画処理は行わずに、この関数をすぐに終了します。これにより、マウスをドラッグしている間だけ線が描かれるようになります。
                     </p>
                 </li>
-                <li><strong>(15) `ctx.beginPath();`</strong><br>
+                <li><strong>(15) ctx.beginPath();</strong><br>
                     <p>
                         新しい描画パス（線や図形を描くための経路）を開始します。これにより、以前に描いた線と、これから描く線を独立して扱うことができます。
                     </p>
                 </li>
-                <li><strong>(16) `ctx.moveTo(lastX, lastY);`</strong><br>
+                <li><strong>(16) ctx.moveTo(lastX, lastY);</strong><br>
                     <p>
-                        「ペンを紙から離して、`lastX`と`lastY`の地点に置く」ようなイメージです。ここから線が始まります。
+                        「ペンを紙から離して、"lastX"と"lastY"の地点に置く」ようなイメージです。ここから線が始まります。
                     </p>
                 </li>
-                <li><strong>(17) `ctx.lineTo(e.offsetX, e.offsetY);`</strong><br>
+                <li><strong>(17) ctx.lineTo(e.offsetX, e.offsetY);</strong><br>
                     <p>
-                        `lastX`と`lastY`の地点から、現在のマウスの位置（`e.offsetX`, `e.offsetY`）まで線を引くためのパスを追加します。これは「ペンを紙につけたまま、新しい位置まで線を引く準備をする」ようなイメージです。
+                        "lastX"と"lastY"の地点から、現在のマウスの位置（"e.offsetX", "e.offsetY"）まで線を引くためのパスを追加します。これは「ペンを紙につけたまま、新しい位置まで線を引く準備をする」ようなイメージです。
                     </p>
                 </li>
-                <li><strong>(18) `ctx.stroke();`</strong><br>
+                <li><strong>(18) ctx.stroke();</strong><br>
                     <p>
-                        `beginPath()`から`lineTo()`で定義したパス（線）を、実際にキャンバス上に描画します。この命令がなければ、パスは定義されるだけで画面には表示されません。
+                        "beginPath()"から"lineTo()"で定義したパス（線）を、実際にキャンバス上に描画します。この命令がなければ、パスは定義されるだけで画面には表示されません。
                     </p>
                 </li>
-                <li><strong>(19) `[lastX, lastY] = [e.offsetX, e.offsetY];`</strong><br>
+                <li><strong>(19) [lastX, lastY] = [e.offsetX, e.offsetY];</strong><br>
                     <p>
-                        線を描き終えたら、現在のマウスの位置を次の描画の「開始点」として`lastX`と`lastY`に保存し直します。これにより、マウスを連続してドラッグしても、途切れることなく線が描かれ続けます。
+                        線を描き終えたら、現在のマウスの位置を次の描画の「開始点」として"lastX"と"lastY"に保存し直します。これにより、マウスを連続してドラッグしても、途切れることなく線が描かれ続けます。
                     </p>
                 </li>
-                <li><strong>(20) `canvas.addEventListener('mouseup', () => isDrawing = false);`</strong><br>
+                <li><strong>(20) canvas.addEventListener('mouseup', () => isDrawing = false);</strong><br>
                     <p>
-                        マウスのボタンが「離された」とき（`mouseup`イベント）に、`isDrawing`を`false`に戻し、「もう描画は終わったよ」という状態にします。
+                        マウスのボタンが「離された」とき（"mouseup"イベント）に、"isDrawing"を"false"に戻し、「もう描画は終わったよ」という状態にします。
                     </p>
                 </li>
-                <li><strong>(21) `canvas.addEventListener('mouseout', () => isDrawing = false);`</strong><br>
+                <li><strong>(21) canvas.addEventListener('mouseout', () => isDrawing = false);</strong><br>
                     <p>
-                        マウスカーソルがキャンバスの領域から「外に出た」とき（`mouseout`イベント）にも、`isDrawing`を`false`に戻します。これにより、キャンバスの外でマウスを離してしまっても、意図しない線が描かれ続けるのを防ぎます。
+                        マウスカーソルがキャンバスの領域から「外に出た」とき（"mouseout"イベント）にも、"isDrawing"を"false"に戻します。これにより、キャンバスの外でマウスを離してしまっても、意図しない線が描かれ続けるのを防ぎます。
                     </p>
                 </li>
-                <li><strong>(22) `const clearButton = document.getElementById('clear-canvas-btn');`</strong><br>
+                <li><strong>(22) const clearButton = document.getElementById('clear-canvas-btn');</strong><br>
                     <p>
-                        「キャンバスをクリア」と書かれたボタンのHTML要素をJavaScriptで取得し、`clearButton`という定数に保存しています。
+                        「キャンバスをクリア」と書かれたボタンのHTML要素をJavaScriptで取得し、"clearButton"という定数に保存しています。
                     </p>
                 </li>
-                <li><strong>(23) `clearButton.addEventListener('click', () => { ... });`</strong><br>
+                <li><strong>(23) clearButton.addEventListener('click', () => { ... });</strong><br>
                     <p>
-                        `clearButton`が「クリックされた」とき（`click`イベント）に、その直後に続くアロー関数の中の処理を実行するように設定しています。
+                        "clearButton"が「クリックされた」とき（"click"イベント）に、その直後に続くアロー関数の中の処理を実行するように設定しています。
                     </p>
                 </li>
-                <li><strong>(24) `ctx.clearRect(0, 0, canvas.width, canvas.height);`</strong><br>
+                <li><strong>(24) ctx.clearRect(0, 0, canvas.width, canvas.height);</strong><br>
                     <p>
-                        `clearButton`がクリックされたときに実行される処理です。`ctx.clearRect()`は、指定した範囲のキャンバスの内容を消去する命令です。ここでは`0, 0, canvas.width, canvas.height`と指定することで、キャンバスの左上隅から右下隅まで、キャンバス全体をクリアしています。
+                        "clearButton"がクリックされたときに実行される処理です。"ctx.clearRect()"は、指定した範囲のキャンバスの内容を消去する命令です。ここでは"0, 0, canvas.width, canvas.height"と指定することで、キャンバスの左上隅から右下隅まで、キャンバス全体をクリアしています。
                     </p>
                 </li>
             </ol>
-            <p class="leading-relaxed">
-                このお絵かきボードのプログラムは、マウスイベントを正確に捉え、その情報を使ってキャンバス上に線を描画するという、JavaScriptの基本的なインタラクティブ機能の素晴らしい例です。
-            </p>
         </section>
 
         <section id="applications" class="box5-5">
             <h2 class="heading-16">その他のJavaScriptの活用例</h2>
             <p>
-                JavaScriptはウェブページのインタラクティブ性を高めるだけでなく、様々な分野で活用されています。
+                JavaScriptはウェブページの対話性を高めるだけでなく、様々な分野で活用されています。
             </p>
             <ol>
-                <li><strong>Node.js:</strong> サーバーサイドでJavaScriptを実行し、ウェブアプリケーションのバックエンドを構築できます。</li>
-                <li><strong>React, Vue.js, Angular:</strong> 大規模なシングルページアプリケーション（SPA）を効率的に開発するための人気フレームワークです。</li>
+                <li><strong>Node.js:</strong>ウェブサイトの裏側（サーバー）を作って、データのやり取りや処理をしたり、アプリの土台を構築したりできます。</li>
+                <li><strong>React, Vue.js, Angular:</strong> 複雑なウェブサイトや、ページを切り替えずに表示内容が変わるようなアプリ（FacebookやTwitterのようなもの）を効率よく作るのに使われます。</li>
                 <li><strong>非同期処理（Promise, async/await）:</strong> ネットワークからのデータ取得など、時間のかかる処理をスムーズに行うための機能です。</li>
-                <li><strong>DOM操作とイベントハンドリング:</strong> ユーザーの操作（クリック、入力など）に応じてウェブページの要素を動的に変更します。</li>
+                <li><strong>DOM操作とイベントハンドリング:</strong>  ボタンをクリックしたら画像が変わる、文字を入力したらメッセージが表示されるなど、ユーザーの操作に合わせてウェブページを動的に変化させられます。</li>
                 <li><strong>WebSockets:</strong> リアルタイムチャットやゲームなど、サーバーとクライアント間で双方向通信を行うために使用されます。</li>
-                <li><strong>PWA (Progressive Web Apps):</strong> オフラインでも動作する、ネイティブアプリのような体験を提供するウェブアプリケーションです。</li>
+                <li><strong>PWA (Progressive Web Apps):</strong> オフラインでも動作する、スマートフォンのホーム画面に追加できるような、まるで普通のアプリのようなウェブサイトを作れます。</li>
             </ol>
-            <p class="text-sm text-gray-600">
-                より高度なJavaScriptの活用例については、<a href="https://www.freecodecamp.org/news/tag/javascript/" target="_blank">freecodeCampのJavaScript記事</a>も参考になります。
-            </p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 JavaScript入門チュートリアル</p>
-        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約18.5時間</p>
+        <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）：約10.5時間</p>
+        <img src="deskman.png" alt="PCを操作する人のイラスト">
+        <p class="text-sm text-gray-600 mt-2">
+            アイコン by <a target="_blank" href="https://pictogram2.com/">human pictogram 2.0</a>
     </footer>
 
     <script src="script.js"></script>
